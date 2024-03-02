@@ -1,134 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+        (function ()
+        {
+            var redirectToIndex = function ()
+            {
+                var path = window.location.pathname;
+                var search = window.location.search;
+                var hash = window.location.hash;
+                var targetURL = '/' + path + search + hash;
 
-    <style>
-        body {
-            background-color: black;
-        }
+                // Perform the redirection.
+                window.location.href = targetURL;
+            };
 
-        @font-face {
-            font-family: "Digital";
-            src: url("/digital_7/Digital-7.ttf?") format("truetype");
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        #fps {
-            font-family: Digital;
-            position: fixed;
-            left: 5px;
-            top: 1px;
-            color: lime;
-            outline: black;
-            text-shadow: var(--firefox-body-shadow) !important;
-            image-rendering: pixelated;
-            --body-text-shadow: none;
-            --green-text-shadow: none;
-            --firefox-body-shadow: none;
-            --firefox-green-shadow: none;
-            --letter-shadow: none;
-        }
-    </style>
-
-
+            // Call the redirection function immediately.
+            redirectToIndex();
+        })();
+    </script>
 </head>
 <body>
-<span id="fps"></span>
-
-<img src="9c0.png" alt="Image" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;">
-
-
-
-<script type="module">
-
-    var before = 0,
-        now,
-        fps = 0,
-        cfps = 0;
-    var last25 = new Array(25).fill(35);
-    var i25 = 0;
-    var fpsElement = document.getElementById("fps");
-    if (window.requestAnimationFrame)
-        window.requestAnimationFrame(function loop(time)
-        {
-            now = time;
-            fps = Math.round(1000 / (now - before));
-            before = now;
-            last25.push(fps);
-            if (last25.length > 25) last25.shift();
-            if (i25++ > 10) {
-                i25 = 0;
-                cfps = Math.round(
-                    last25.reduce(function (a, b)
-                    {
-                        return a + b;
-                    }, 0) / 25
-                );
-                if (!isFinite(cfps)) {
-                    fpsElement.innerText = "";
-                    fpsElement.textContent = "";
-                }
-                else {
-                    if (fpsElement.innerText != cfps) {
-                        fpsElement.innerText = cfps;
-                        fpsElement.textContent = cfps;
-                    }
-                }
-            }
-            window.requestAnimationFrame(loop);
-        });
-    var perf = setInterval(function ()
-    {
-        var lp = Math.round(
-            last25.reduce(function (a, b)
-            {
-                return a + b;
-            }, 0) / 25
-        );
-        if (lp < 30) {
-            try {
-                if (!rainStopped) {
-                    rainStopped = true;
-                    stopRain();
-                    document.getElementById("debug").innerText =
-                        "Slow device, disabled rain";
-                    document.getElementById("debug").textContent =
-                        "Slow device, disabled rain";
-                    setTimeout(function ()
-                    {
-                        document.getElementById("debug").innerText = "";
-                        document.getElementById("debug").textContent = "";
-                    }, 5000);
-                }
-            }
-            catch (e) {}
-        }
-        if (lp < 28) {
-            clearInterval(perf);
-            document.getElementById("debug").innerText =
-                "Slow device, disabled effects";
-            document.getElementById("debug").textContent =
-                "Slow device, disabled effects";
-            setTimeout(function ()
-            {
-                document.getElementById("debug").innerText = "";
-                document.getElementById("debug").textContent = "";
-            }, 5000);
-            // slow
-            isSlow = true;
-            var root = document.querySelector(":root");
-            root.style.setProperty("--body-text-shadow", "none");
-            root.style.setProperty("--green-text-shadow", "none");
-            root.style.setProperty("--firefox-body-shadow", "none");
-            root.style.setProperty("--firefox-green-shadow", "none");
-            root.style.setProperty("--letter-shadow", "none");
-            kelvin.classList.remove("kelvin-light");
-        }
-    }, 2500);
-
-</script>
+<p>If you are not redirected, <a href="/index.html">click here</a> to continue.</p>
 </body>
 </html>
